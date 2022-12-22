@@ -34,7 +34,7 @@ mqtt_device.online requires `availability: true` *(default = false)* and `legacy
 
 [^1]: Possible values for light_effect.start are: *`blink`, `breathe`, `okay`, `channel_change`, `finish_effect`, `stop_effect`*. 
 [^2]: light_effect.current is not readable from device.
-[^3]: It's not possible to poll battery powered devices.
+[^3]: It's not possible to poll battery powered devices, recomendeation is to publish `retained` messages from the client.
 
 # Support
 Support is provided by @Crille through [Smart Home Community](https://smarthome.community/)
