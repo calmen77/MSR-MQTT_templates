@@ -1,0 +1,52 @@
+# Requires: "topic".
+# Optional "prefix" (default: myhome).
+# https://github.com/EliasKotlyar/Xiaomi-Dafang-Hacks
+
+description: "Custom template for Xiaomi DaFang Hacks / XiaoFang 1S / Wyzecam V2 / Wyzecam Pan / Other T20 Devices."
+author: "@Crille, Smart Home Community"
+license: MIT
+repository: "https://github.com/calmen77/MSR-mqtt_templates"
+version: 22353
+
+templates:
+  xiaofang_motion_light_sensor:
+    capabilities: 
+      - motion_sensor
+      - light_sensor
+      - string_sensor
+      - power_switch
+      - toggle
+    primary_attribute: power_switch.state
+    requires: [topic]
+    events:
+      "%prefix:myhome%/%topic%/motion":
+        "motion_sensor.state":
+          if_expr: '! isnull(payload)'
+          expr: 'payload == "ON"'
+      "%prefix:myhome%/%topic%/motion/detection":
+        "power_switch.state":
+          if_expr: '! isnull(payload)'
+          expr: 'payload == "ON"'
+      "%prefix:myhome%/%topic%/brightness":
+        "light_sensor.value":
+          if_expr: '! isnull(payload)'
+          expr: 'payload'
+        "light_sensor.units": "virtual"
+      "%prefix:myhome%/%topic%":
+        "string_sensor.value":
+          json_payload: true
+          if_expr: '! isnull(payload)'
+          expr: 'substr(ltrim(payload.uptime), 0, 8)'
+    actions:
+      power_switch:
+        "on":
+          topic: "%prefix:myhome%/%topic%/motion/detection/set"
+          payload: "ON"
+        "off":
+          topic: "%prefix:myhome%/%topic%/motion/detection/set"
+          payload: "OFF"
+        set:
+          topic: "%prefix:myhome%/%topic%/motion/detection/set"
+          payload:
+            expr: "parameters.state ? 'on' : 'off'"
+            type: raw

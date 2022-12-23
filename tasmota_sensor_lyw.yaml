@@ -1,0 +1,39 @@
+# Requires: "topic, source".
+# https://tasmota.github.io/docs/Bluetooth_ESP32/#supported-devices
+
+description: "Tasmota template for Digital Display BLE sensor for Temperature and Humidity (LYWSD03MMC)."
+author: "@Crille, Smart Home Community"
+license: MIT
+repository: "https://github.com/calmen77/MSR-mqtt_templates"
+version: 22353
+
+templates:
+  tasmota_sensor_lyw:
+    type: ValueSensor
+    capabilities: 
+      - temperature_sensor
+      - humidity_sensor
+      - battery_power
+    primary_attribute: temperature_sensor.value
+    requires: [topic, source]
+    events:
+      "tele/%topic%/SENSOR":
+        "temperature_sensor.value":
+          json_payload: true
+          if_expr: '! isnull( payload?[ source ] )'
+          expr: 'payload?[source]?.Temperature'
+        "temperature_sensor.units":
+          json_payload: true
+          if_expr: '! isnull( payload?.TempUnit )'
+          expr: 'payload.TempUnit'
+        "humidity_sensor.value":
+          json_payload: true
+          if_expr: '! isnull( payload?[ source ] )'
+          expr: 'payload?[source]?.Humidity'
+        "humidity_sensor.units": "%"
+        "battery_power.level":
+          json_payload: true
+          if_expr: '! isnull( payload?[ source ] )'
+          expr: 'payload?[source]?.Battery / 100'
+        "battery_power.since":
+          expr: 'time()'
