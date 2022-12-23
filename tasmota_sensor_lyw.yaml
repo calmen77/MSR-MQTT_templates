@@ -8,7 +8,6 @@ repository: "https://github.com/calmen77/MSR-mqtt_templates"
 version: 22353
 
 templates:
-# tasmota_sensor_lyw
   tasmota_sensor_lyw:
     type: ValueSensor
     capabilities: 
