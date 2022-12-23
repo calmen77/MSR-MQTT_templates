@@ -33,6 +33,8 @@ mqtt_device.online requires `availability: true` *(default = false)* and `legacy
 | `zigbee2mqtt_tradfri_light_bulb_ws_d` | Zigbee2MQTT template for [IKEA TRADFRI bulb E12/E14/E17 WS 450/470/440 lumen, dimmable, white spectrum, opal white](https://www.zigbee2mqtt.io/devices/LED1903C5_LED1835C6.html#ikea-led1903c5%252Fled1835c6) | ***_dimming_***, power_switch, color_temperature, light_effect, value_sensor, string_sensor, toggle | Same as the above but with dimming.level as primary attribute. | zigbee2mqtt_ikea_tradfri.zip |
 | `zigbee2mqtt_tuya_smart_plug_pm` | Zigbee2MQTT template for [TuYa Smart plug (with power monitoring)](https://www.zigbee2mqtt.io/devices/TS011F_plug_1.html) | ***_power_switch_***, power_sensor, current_sensor, energy_sensor, voltage_sensor, value_sensor, string_sensor, toggle | - | - |
 
+All Zigbee2MQTT devices supporting OTA firmware updates will have either "OTA firmware update available!" or "no update available" in the `string_sensor.value`
+
 [^1]: Possible values for `light_effect.start` are: `blink`, `breathe`, `okay`, `channel_change`, `finish_effect`, `stop_effect`. 
 [^2]: `light_effect.current` is not readable from device.
 [^3]: It's not possible to poll battery powered devices, recomendeation is to publish `retained` messages from the client.
