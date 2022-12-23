@@ -1,4 +1,4 @@
 # Change Log
 
 ## *All*
-22353 - Initial release
+22353 - Initial release.
