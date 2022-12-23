@@ -1,5 +1,5 @@
 # Requires: "topic".
-# Optional "prefix".
+# Optional "prefix" (default: myhome).
 # https://github.com/EliasKotlyar/Xiaomi-Dafang-Hacks
 
 description: "Custom template for Xiaomi DaFang Hacks / XiaoFang 1S / Wyzecam V2 / Wyzecam Pan / Other T20 Devices."
