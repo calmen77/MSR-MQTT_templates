@@ -18,6 +18,7 @@ mqtt_device.online requires `availability: true` *(default = false)* and `legacy
 # Templates
 | Template name | Description | Capabilities | Additional info | Bundled in |
 | --- | --- | --- | --- | --- |
+| `shelly_plug_s` | Template for [Shelly Plug S](https://www.shelly.cloud/en-se/products/product-overview/shelly-plug-s) | ***_power_switch_***, power_sensor, energy_sensor, temperature_sensor, binary_sensor | binary_sensor monitors device overtemperature | - |
 | `tasmota_sensor_lyw` | Tasmota template for Xiaomi Digital Display BLE Temperature and Humidity sensor [LYWSD03MMC](https://tasmota.github.io/docs/Bluetooth_ESP32/#supported-devices) | ***_temperature_sensor_***, humidity_sensor, battery_power | x_mqtt_device.poll[^3] | - |
 | `tasmota_sensor_lyw_h` | Tasmota template for Xiaomi Digital Display BLE Temperature and Humidity sensor [LYWSD03MMC](https://tasmota.github.io/docs/Bluetooth_ESP32/#supported-devices) | ***_humidity_sensor_***, temperature_sensor, battery_power | Same as the above but with humidity_sensor.value as primary attribute. | tasmota_sensor_lyw.yaml |
 | `xiaofang_motion_light_sensor` | Custom template for [Xiaomi DaFang Hacks / XiaoFang 1S / Wyzecam V2 / Wyzecam Pan / Other T20 Devices](https://github.com/EliasKotlyar/Xiaomi-Dafang-Hacks) | ***_power_switch_***, motion_sensor, light_sensor, string_sensor | power_switch activates/deactivates the cameras motion sensor detection. Optional configuration key `prefix:` *(default = myhome)* light_sensor.value[^5] x_mqtt_device.online[^4]  | - |
