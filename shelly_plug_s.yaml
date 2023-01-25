@@ -1,0 +1,63 @@
+# Requires: "topic".
+# https://www.shelly.cloud/en-se/products/product-overview/shelly-plug-s
+
+description: "Template for Shelly Plug S."
+author: "@Crille, Smart Home Community"
+license: MIT
+repository: "https://github.com/calmen77/MSR-mqtt_templates"
+version: 23025
+
+templates:
+  shelly_plug_s:
+    type: Switch
+    capabilities:
+      - power_switch
+      - power_sensor
+      - energy_sensor
+      - temperature_sensor
+      - binary_sensor
+      - toggle
+    primary_attribute: power_switch.state
+    requires: [topic]
+    query:
+      topic: "shellies/%topic%/command"
+      payload: "update"
+    events:
+      "shellies/%topic%/relay/0":
+        "power_switch.state":
+          expr: 'bool(payload)'
+      "shellies/%topic%/relay/0/power":
+        "power_sensor.value":
+          if_expr: '! isnull(payload)'
+          expr: 'float(payload)'
+        "power_sensor.units": "W"
+      "shellies/%topic%/relay/0/energy":
+        "energy_sensor.value":
+          if_expr: '! isnull(payload)'
+          expr: 'round(float(payload / 60 / 1000),2)'
+        "energy_sensor.units": "kWh"
+      "shellies/%topic%/temperature":
+        "temperature_sensor.value":
+          if_expr: '! isnull(payload)'
+          expr: 'float(payload)'
+        "temperature_sensor.units": "C"
+      "shellies/%topic%/overtemperature":
+        "binary_sensor.state":
+          if_expr: '! isnull(payload)'
+          expr: 'bool(payload)'
+      "shellies/%topic%/online":
+        "x_mqtt_device.online":
+           expr: 'bool(payload)'
+    actions:
+      power_switch:
+        "on":
+          topic: "shellies/%topic%/relay/0/command"
+          payload: "on"
+        "off":
+          topic: "shellies/%topic%/relay/0/command"
+          payload: "off"
+        set:
+          topic: "shellies/%topic%/relay/0/command"
+          payload:
+            expr: "parameters.state ? 'on' : 'off'"
+            type: raw
