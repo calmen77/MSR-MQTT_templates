@@ -5,7 +5,7 @@ MQTT templates for Multi-hub Reactor.
 Download the desired yaml files or bundled zip archives and save them in the reactor/config/mqtt_templates folder (no need to exctract the zip files), **restart Reactor**.
 
 To update an existing template just do the same procedure.
-*If the template has breaking changes like capabilities removed, simply delete the entity from Reactors Entities page and restart Reactor to recreate the entity.*
+~~If the template has breaking changes like capabilities removed, simply delete the entity from Reactors Entities page and restart Reactor to recreate the entity.~~
 MQTTController build 24050 and newer: No need to recreate the entity, MQTTController rebuilds the entity when a new template version is detected.
 
 # Configuration
