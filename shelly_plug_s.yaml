@@ -19,6 +19,7 @@ templates:
       - toggle
     primary_attribute: power_switch.state
     requires: [topic]
+    lwt: "shellies/%topic%/online"
     query:
       topic: "shellies/%topic%/command"
       payload: "update"
@@ -45,9 +46,6 @@ templates:
         "binary_sensor.state":
           if_expr: '! isnull(payload)'
           expr: 'bool(payload)'
-      "shellies/%topic%/online":
-        "x_mqtt_device.online":
-           expr: 'bool(payload)'
     actions:
       power_switch:
         "on":
