@@ -1,5 +1,15 @@
 ## Change Log
 
+`zigbee2mqtt_tuya_door_sensor` *24087* - Initial release.
+
+---
+
+`zigbee2mqtt_tuya_occupancy_illuminance`
+`zigbee2mqtt_tuya_illuminance_occupancy`
+*24005* - Initial release.
+
+---
+
 `shelly_plug_s` *23025* - Initial release.
 
 ---
