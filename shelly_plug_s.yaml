@@ -5,7 +5,7 @@ description: "Template for Shelly Plug S."
 author: "@Crille, Smart Home Community"
 license: MIT
 repository: "https://github.com/calmen77/MSR-mqtt_templates"
-version: 24056
+version: 24116
 
 templates:
   shelly_plug_s:
@@ -17,6 +17,7 @@ templates:
       - temperature_sensor
       - binary_sensor
       - toggle
+      - wifi_status
     primary_attribute: power_switch.state
     requires: [topic]
     lwt: "shellies/%topic%/online"
@@ -46,6 +47,16 @@ templates:
         "binary_sensor.state":
           if_expr: '! isnull(payload)'
           expr: 'bool(payload)'
+      "shellies/%topic%/info":
+        "wifi_status.ssid":
+          json_payload: true
+          expr: "payload.wifi_sta.ssid"
+        "wifi_status.rssi":
+          json_payload: true
+          expr: "payload.wifi_sta.rssi"
+        "wifi_status.station_ip":
+          json_payload: true
+          expr: "payload.wifi_sta.ip"
     actions:
       power_switch:
         "on":
